@@ -1,3 +1,4 @@
+//prime numbers from 1 to n
 package main
 
 import (
