@@ -1,0 +1,44 @@
+This code shows the percentage of CPU usage per second using the /proc/stat directory. 
+If it exceeds the threshold value, it shows an error message.
+
+
+Interchangeable features:
+1-threshold value  #Current %10 , u can change this.
+2-second intervals #Current 1sec, u can change this.
+
+Sample Outputs
+------------------------------------------------------
+Percentage of CPU usage in 1 second intervals:
+after 1 second: CPUsage: 15.3 
+WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 10% 
+after 2 second: CPUsage: 13.8 
+WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 10% 
+after 3 second: CPUsage: 13.0 
+WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 10% 
+after 4 second: CPUsage: 18.2 
+WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 10% 
+after 5 second: CPUsage: 16.5 
+WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 10% 
+after 6 second: CPUsage: 18.8 
+WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 10% 
+after 7 second: CPUsage: 16.0 
+WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 10% 
+after 8 second: CPUsage: 16.0 
+WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 10% 
+after 9 second: CPUsage: 8.5 
+after 10 second: CPUsage: 6.9
+------------------------------------------------------
+Percentage of CPU usage in 1 second intervals:
+after 1 second: CPUsage: 12.4 
+WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 10% 
+after 2 second: CPUsage: 11.7 
+WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 10% 
+after 3 second: CPUsage: 9.1 
+after 4 second: CPUsage: 8.1 
+after 5 second: CPUsage: 7.0 
+after 6 second: CPUsage: 7.7 
+after 7 second: CPUsage: 8.6 
+after 8 second: CPUsage: 8.9 
+after 9 second: CPUsage: 7.4 
+after 10 second: CPUsage: 7.8 
+------------------------------------------------------
