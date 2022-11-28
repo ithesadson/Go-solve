@@ -1,6 +1,8 @@
 This code shows the percentage of CPU usage per second using the /proc/stat directory. 
 If it exceeds the threshold value, it shows an error message.
 
+#use with parameter to run the code from terminal ForExample: 
+$go run CPUsage.go 20 $go run file.go "percent"
 
 Interchangeable features:
 1-threshold value  #Current %10 , u can change this.
@@ -8,37 +10,36 @@ Interchangeable features:
 
 Sample Outputs
 ------------------------------------------------------
+Determined max cpu value:20
 Percentage of CPU usage in 1 second intervals:
-after 1 second: CPUsage: 15.3 
-WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 10% 
-after 2 second: CPUsage: 13.8 
-WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 10% 
-after 3 second: CPUsage: 13.0 
-WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 10% 
-after 4 second: CPUsage: 18.2 
-WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 10% 
-after 5 second: CPUsage: 16.5 
-WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 10% 
-after 6 second: CPUsage: 18.8 
-WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 10% 
-after 7 second: CPUsage: 16.0 
-WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 10% 
-after 8 second: CPUsage: 16.0 
-WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 10% 
-after 9 second: CPUsage: 8.5 
-after 10 second: CPUsage: 6.9
+after 1 second: MaxCPUsage: 4.6 
+after 2 second: MaxCPUsage: 5.0 
+after 3 second: MaxCPUsage: 4.6 
+after 4 second: MaxCPUsage: 17.5 
+after 5 second: MaxCPUsage: 26.0 
+WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 20 
+after 6 second: MaxCPUsage: 26.3 
+WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 20 
+after 7 second: MaxCPUsage: 21.1 
+WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 20 
+after 8 second: MaxCPUsage: 17.8 
+after 9 second: MaxCPUsage: 25.9 
+WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 20 
 ------------------------------------------------------
+Determined max cpu value:40
 Percentage of CPU usage in 1 second intervals:
-after 1 second: CPUsage: 12.4 
-WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 10% 
-after 2 second: CPUsage: 11.7 
-WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 10% 
-after 3 second: CPUsage: 9.1 
-after 4 second: CPUsage: 8.1 
-after 5 second: CPUsage: 7.0 
-after 6 second: CPUsage: 7.7 
-after 7 second: CPUsage: 8.6 
-after 8 second: CPUsage: 8.9 
-after 9 second: CPUsage: 7.4 
-after 10 second: CPUsage: 7.8 
+after 1 second: MaxCPUsage: 16.0 
+after 2 second: MaxCPUsage: 21.4 
+after 3 second: MaxCPUsage: 34.9 
+after 4 second: MaxCPUsage: 36.5 
+after 5 second: MaxCPUsage: 56.6 
+WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 40 
+after 6 second: MaxCPUsage: 67.7 
+WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 40 
+after 7 second: MaxCPUsage: 75.4 
+WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 40 
+after 8 second: MaxCPUsage: 81.9 
+WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 40 
+after 9 second: MaxCPUsage: 87.3 
+WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded 40 
 ------------------------------------------------------
