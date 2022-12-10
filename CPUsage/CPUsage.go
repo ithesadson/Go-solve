@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -10,11 +11,39 @@ import (
 	"time"
 )
 
-func ConvertArgs(Args string) float64 {
-	MaxCpu, _ := strconv.Atoi(Args)
-	var MaxCPUsage float64 = float64(MaxCpu)
-	fmt.Printf("Determined max cpu usage value: %d", MaxCpu)
-	return MaxCPUsage
+func Flags() (float64, int) {
+	var DefaultCpuThreshold float64 = 20
+	var DefaultInterval int = 1
+
+	CpuThresholdPtr := flag.Float64("CpuThresold", DefaultCpuThreshold, "a float")
+	IntervalPtr := flag.Int("Interval", DefaultInterval, "an int")
+	flag.Parse()
+
+	var MaxCPUsage float64
+	if *CpuThresholdPtr > 0 {
+		MaxCPUsage = (*CpuThresholdPtr)
+	} else {
+		MaxCPUsage = DefaultCpuThreshold //CPU usage threshold cannot be less than 0.
+	}
+	if MaxCPUsage == (DefaultCpuThreshold) {
+		fmt.Printf("Default CPU threshold value selected: %.1f\n", DefaultCpuThreshold) //Default threshold Value
+	} else {
+		fmt.Printf("Determined max cpu threshold value: %.2f\n", *CpuThresholdPtr)
+	}
+
+	var ValueInterval int
+	if *IntervalPtr > 0 {
+		ValueInterval = (*IntervalPtr)
+	} else {
+		ValueInterval = DefaultInterval //Interval cannot be less than 0.
+	}
+	if ValueInterval == DefaultInterval {
+		fmt.Printf("Default Interval Value Selected: %d\n ", DefaultInterval) //Default Interval
+	} else {
+		fmt.Printf("Determined Interval value: %d\n", *IntervalPtr)
+	}
+
+	return MaxCPUsage, ValueInterval
 }
 
 func openProcStatFile() string {
@@ -35,16 +64,9 @@ func openProcStatFile() string {
 }
 
 func main() {
-	var MaxCPUsage float64
-	var DefaultCpuCheck float64 = 20 // Default value to control CPU Usage
-	if len(os.Args) > 1 {
-		MaxCPUsage = ConvertArgs(os.Args[1])
-	} else {
-		MaxCPUsage = DefaultCpuCheck
-		fmt.Printf("Cpu usage is set to default %.1f, because no argument was entered.\n", DefaultCpuCheck)
-	}
+	MaxCPUsage, ValueInterval := Flags()
 
-	fmt.Println("\nPercentage of CPU usage in 1 second intervals:") // n-> 1,2,3....n
+	fmt.Printf("\nPercentage of CPU usage in %d second intervals:\n", ValueInterval) // n-> 1,2,3....n
 	var firstIdle, lastIdle uint64
 
 	for i := 0; i < 10; i++ {
@@ -61,11 +83,11 @@ func main() {
 			alfaTotalTime := totalTime - lastIdle
 			Idle_Cpu_Percent := float64(alfaIdleTime) / float64(alfaTotalTime) // Free CPU %
 			cpuUsagePerSec := (1.0 - Idle_Cpu_Percent) * 100.0
-			if cpuUsagePerSec >= MaxCPUsage {
-				fmt.Printf("after %d second: MaxCPUsage: %.1f \n", i, cpuUsagePerSec)
+			if cpuUsagePerSec >= float64(MaxCPUsage) {
+				fmt.Printf("after %d second: MaxCPUsage: %.1f \n", i*ValueInterval, cpuUsagePerSec)
 				fmt.Printf("WARNING --- HIGH CPU USAGE!!!---CPU usage exceeded %.0f \n", MaxCPUsage)
 			} else {
-				fmt.Printf("after %d second: MaxCPUsage: %.1f \n", i, cpuUsagePerSec)
+				fmt.Printf("after %d second: MaxCPUsage: %.1f \n", i*ValueInterval, cpuUsagePerSec)
 			}
 		}
 		firstIdle = idleTime
