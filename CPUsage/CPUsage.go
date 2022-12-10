@@ -13,7 +13,7 @@ import (
 func ConvertArgs(Args string) float64 {
 	MaxCpu, _ := strconv.Atoi(Args)
 	var MaxCPUsage float64 = float64(MaxCpu)
-	fmt.Printf("Determined max cpu value:%d", MaxCpu)
+	fmt.Printf("Determined max cpu usage value: %d", MaxCpu)
 	return MaxCPUsage
 }
 
@@ -35,7 +35,15 @@ func openProcStatFile() string {
 }
 
 func main() {
-	MaxCPUsage := ConvertArgs(os.Args[1])
+	var MaxCPUsage float64
+	var DefaultCpuCheck float64 = 20 // Default value to control CPU Usage
+	if len(os.Args) > 1 {
+		MaxCPUsage = ConvertArgs(os.Args[1])
+	} else {
+		MaxCPUsage = DefaultCpuCheck
+		fmt.Printf("Cpu usage is set to default %.1f, because no argument was entered.\n", DefaultCpuCheck)
+	}
+
 	fmt.Println("\nPercentage of CPU usage in 1 second intervals:") // n-> 1,2,3....n
 	var firstIdle, lastIdle uint64
 
