@@ -9,21 +9,18 @@ import (
 )
 
 var apiKey = "your_api_key"
-var cityId = "city_id"
-var URL string = "http://api.openweathermap.org/data/2.5/forecast?id=" + cityId + "&appid=" + apiKey
+var cityId = "city_name" // {city name},{state code},{country code}
+
+var URL string = "https://api.openweathermap.org/data/2.5/weather?q=" + cityId + "&appid=" + apiKey
 
 type Weather struct {
-	List []struct {
-		Main struct {
-			Temp    float64 `json:"temp"`
-			Tempmin float64 `json:"temp_min"`
-			Tempmax float64 `json:"temp_max"`
-		} `json:"main"`
-	} `json:"list"`
-	City struct {
-		Id   int    `json:"id"`
-		Name string `json:"name"`
-	} `json:"city"`
+	Main struct {
+		Temp     float64 `json:"temp"`
+		Temp_min float64 `json:"temp_min"`
+		Temp_max float64 `json:"temp_max"`
+	} `json:"main"`
+	Id   int    `json:"id"`
+	Name string `json:"name"`
 }
 
 func kelvinToCelsius(k float64) float64 {
@@ -42,7 +39,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	Weather1 := Weather{}
 
 	err = json.Unmarshal(body, &Weather1)
@@ -51,8 +47,9 @@ func main() {
 		log.Fatal()
 	}
 
-	fmt.Println("Id, City:", Weather1.City.Id, ",", Weather1.City.Name)
-	fmt.Printf("Temp:%.2f°\n", kelvinToCelsius(Weather1.List[0].Main.Temp))
-	fmt.Printf("Min_Temp:%.2f°\n", kelvinToCelsius(Weather1.List[0].Main.Tempmin))
-	fmt.Printf("Max_Temp:%.2f°\n", kelvinToCelsius(Weather1.List[0].Main.Tempmax))
+	fmt.Println("Id, City:", Weather1.Id, ",", Weather1.Name)
+	fmt.Printf("Temp:%.1f°\n", kelvinToCelsius(Weather1.Main.Temp))
+	fmt.Printf("Min_Temp:%.1f°\n", kelvinToCelsius(Weather1.Main.Temp_min))
+	fmt.Printf("Max_Temp:%.1f°\n", kelvinToCelsius(Weather1.Main.Temp_max))
+
 }
