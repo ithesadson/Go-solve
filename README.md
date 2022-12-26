@@ -1,3 +1,3 @@
-# Go-solve | Go-lang question solution
+# Go-solve | Go-lang projects
 
 You can use any code you need.
